@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import HeroSection from "@/components/dashboard/HeroSection";
 import QuickStats from "@/components/dashboard/QuickStats";
 import WorkflowSection from "@/components/dashboard/WorkflowSection";
 import RecentActivity from "@/components/dashboard/RecentActivity";
+import Sidebar from "@/components/dashboard/Sidebar";
 import TeachingAssistantBot from "@/components/TeachingAssistantBot";
 import { workflows } from "@/data/workflows";
 
@@ -66,57 +68,68 @@ const Dashboard = () => {
       />
 
       <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <div className="mb-12">
-          <HeroSection />
-          <QuickStats />
-        </div>
+        <div className="flex gap-8">
+          {/* Left Sidebar */}
+          <Sidebar onToolSelect={handleToolSelect} />
 
-        {/* Main Toolkit Sections */}
-        <div className="space-y-12">
-          <WorkflowSection
-            title="🥢 For Beginners"
-            description="Simple, low-tech workflows to get you started"
-            workflows={workflows.beginner}
-            badgeText="Perfect for first-timers"
-            badgeVariant="outline"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="3"
-          />
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Hero Section */}
+            <div className="mb-12">
+              <HeroSection />
+              <QuickStats />
+            </div>
 
-          <WorkflowSection
-            title="⭐ AI Recommendations"
-            description="AI-optimized workflows based on your preferences"
-            workflows={workflows.topPicks}
-            badgeText="Personalized for you"
-            badgeVariant="default"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="2"
-            isLarge={true}
-          />
+            {/* Recent Activity - moved above "For Beginners" */}
+            <div className="mb-12">
+              <RecentActivity activities={recentActivity} />
+            </div>
 
-          <WorkflowSection
-            title="📚 Subject Toolkits"
-            description="Complete tool collections for specific subjects"
-            workflows={workflows.subjectPacks}
-            badgeText="All-in-one solutions"
-            badgeVariant="outline"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="3"
-          />
+            {/* Main Toolkit Sections */}
+            <div className="space-y-12">
+              <WorkflowSection
+                title="🥢 For Beginners"
+                description="Simple, low-tech workflows to get you started"
+                workflows={workflows.beginner}
+                badgeText="Perfect for first-timers"
+                badgeVariant="outline"
+                onWorkflowClick={handleWorkflowClick}
+                gridCols="3"
+              />
 
-          <WorkflowSection
-            title="👥 Community Favorites"
-            description="Popular workflows shared by fellow teachers"
-            workflows={workflows.community}
-            badgeText="View All"
-            showViewAll={true}
-            onViewAllClick={handleCommunityClick}
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="2"
-          />
+              <WorkflowSection
+                title="⭐ AI Recommendations"
+                description="AI-optimized workflows based on your preferences"
+                workflows={workflows.topPicks}
+                badgeText="Personalized for you"
+                badgeVariant="default"
+                onWorkflowClick={handleWorkflowClick}
+                gridCols="2"
+                isLarge={true}
+              />
 
-          <RecentActivity activities={recentActivity} />
+              <WorkflowSection
+                title="📚 Subject Toolkits"
+                description="Complete tool collections for specific subjects"
+                workflows={workflows.subjectPacks}
+                badgeText="All-in-one solutions"
+                badgeVariant="outline"
+                onWorkflowClick={handleWorkflowClick}
+                gridCols="3"
+              />
+
+              <WorkflowSection
+                title="👥 Community Favorites"
+                description="Popular workflows shared by fellow teachers"
+                workflows={workflows.community}
+                badgeText="View All"
+                showViewAll={true}
+                onViewAllClick={handleCommunityClick}
+                onWorkflowClick={handleWorkflowClick}
+                gridCols="2"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
