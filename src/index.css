@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* GoodClass.ai Design System - Inspired by warmth, accessibility, and teacher empowerment
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Brand Colors - Warm, Professional, Inviting */
+    --background: 25 15% 98%;
+    --foreground: 220 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 15%;
+
+    /* GoodClass Terracotta Primary */
+    --primary: 25 35% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 25 45% 65%;
+
+    /* Warm Secondary */
+    --secondary: 25 20% 95%;
+    --secondary-foreground: 220 25% 15%;
+
+    /* Muted Tones */
+    --muted: 25 15% 96%;
+    --muted-foreground: 220 15% 45%;
+
+    /* Success Green */
+    --success: 145 65% 45%;
+    --success-foreground: 0 0% 100%;
+
+    /* Accent - Warm Blue */
+    --accent: 200 50% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 25 20% 90%;
+    --input: 25 20% 95%;
+    --ring: 25 35% 55%;
+
+    --radius: 0.75rem;
+
+    /* Gradients for Beautiful Backgrounds */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-warm: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(145 65% 55%));
+
+    /* Shadows for Depth */
+    --shadow-elegant: 0 4px 20px -4px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 2px 8px -2px hsl(220 25% 15% / 0.08);
+    --shadow-glow: 0 0 20px hsl(var(--primary-glow) / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 25 15% 95%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 25 15% 95%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 25 15% 95%;
+
+    --primary: 25 40% 60%;
+    --primary-foreground: 220 30% 8%;
+    
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 25 15% 95%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 200 50% 55%;
+    --accent-foreground: 220 30% 8%;
+
+    --destructive: 0 65% 60%;
+    --destructive-foreground: 220 30% 8%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 15%;
+    --ring: 25 40% 60%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
