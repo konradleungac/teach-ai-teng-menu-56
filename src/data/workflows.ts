@@ -1,124 +1,106 @@
 
-// Mock data for the prototype
 export const workflows = {
   beginner: [
     {
-      id: "lesson-plan-basic",
-      title: "Quick Lesson Planner",
-      description: "Create structured lesson plans in minutes",
+      id: "simple-quiz-maker",
+      title: "Simple Quiz Maker",
+      description: "Create engaging quizzes with multiple question types and instant feedback",
+      icon: "❓",
+      difficulty: "Beginner",
+      time: "10 minutes",
+      rating: 4.8,
+      users: 2847,
+      isNew: true
+    },
+    {
+      id: "homework-assistant", 
+      title: "Homework Assistant",
+      description: "Generate personalized homework assignments with answer keys",
+      icon: "📝",
+      difficulty: "Beginner", 
+      time: "15 minutes",
+      rating: 4.7,
+      users: 1923,
+      isNew: true
+    },
+    {
+      id: "basic-lesson-plan",
+      title: "Basic Lesson Plan",
+      description: "Create structured lesson plans without complex features",
       icon: "📋",
       difficulty: "Beginner",
-      time: "5 min",
-      rating: 4.8,
-      users: 1240
-    },
-    {
-      id: "quiz-generator",
-      title: "Simple Quiz Maker",
-      description: "Generate quick assessments from your content",
-      icon: "✅",
-      difficulty: "Beginner", 
-      time: "3 min",
-      rating: 4.7,
-      users: 980
-    },
-    {
-      id: "homework-helper",
-      title: "Homework Assistant",
-      description: "Create and grade homework assignments",
-      icon: "📝",
-      difficulty: "Beginner",
-      time: "8 min", 
-      rating: 4.6,
-      users: 760
+      time: "20 minutes", 
+      rating: 4.5,
+      users: 3421
     }
   ],
   topPicks: [
     {
-      id: "smart-grading",
-      title: "AI-Powered Grading Suite",
-      description: "Comprehensive grading with detailed feedback",
-      icon: "🎯",
-      difficulty: "Intermediate",
-      time: "10 min",
+      id: "ai-lesson-builder",
+      title: "AI Lesson Builder",
+      description: "Advanced lesson planning with AI-powered content generation and differentiation",
+      icon: "🤖",
       rating: 4.9,
-      users: 2100,
+      users: 8934,
+      tools: 12,
       isRecommended: true
     },
     {
-      id: "engagement-tracker",
-      title: "Student Engagement Analytics",
-      description: "Track and improve student participation",
-      icon: "📊", 
-      difficulty: "Advanced",
-      time: "15 min",
+      id: "smart-assessment",
+      title: "Smart Assessment Suite",
+      description: "Comprehensive testing toolkit with rubrics, feedback, and analytics",
+      icon: "📊",
       rating: 4.8,
-      users: 1850
-    },
-    {
-      id: "differentiation-pack",
-      title: "Differentiation Toolkit",
-      description: "Adapt content for all learning styles",
-      icon: "🔄",
-      difficulty: "Intermediate",
-      time: "12 min",
-      rating: 4.9,
-      users: 1920
+      users: 6742,
+      tools: 8,
+      isRecommended: true
     }
   ],
   subjectPacks: [
     {
-      id: "science-pack",
-      title: "Middle School Science RAG Pack",
-      description: "Complete science teaching workflows",
-      subjects: ["Science"],
-      icon: "🔬",
-      tools: 8,
-      rating: 4.9,
-      users: 890
-    },
-    {
-      id: "english-pack", 
-      title: "ELA Writing & Reading Suite",
-      description: "Comprehensive language arts tools",
-      subjects: ["English"],
-      icon: "📚",
-      tools: 12,
-      rating: 4.8,
-      users: 1200
-    },
-    {
-      id: "math-pack",
-      title: "Interactive Math Workbench", 
-      description: "Problem solving and assessment tools",
-      subjects: ["Math"],
+      id: "math-toolkit",
+      title: "Math Toolkit",
+      description: "Complete set of tools for mathematics education",
       icon: "🔢",
-      tools: 10,
       rating: 4.7,
-      users: 1050
+      users: 5432,
+      tools: 15
+    },
+    {
+      id: "language-arts",
+      title: "Language Arts Pack",
+      description: "Reading, writing, and literature tools collection",
+      icon: "📚",
+      rating: 4.6,
+      users: 4321,
+      tools: 12
+    },
+    {
+      id: "science-lab",
+      title: "Science Lab Suite",
+      description: "Interactive science tools and experiments",
+      icon: "🔬",
+      rating: 4.8,
+      users: 3876,
+      tools: 10
     }
   ],
   community: [
     {
-      id: "peer-review",
-      title: "Peer Review Workshop",
-      description: "Collaborative lesson planning with colleagues",
+      id: "collaborative-projects",
+      title: "Collaborative Projects",
+      description: "Student group work and peer assessment tools",
       icon: "👥",
-      difficulty: "Intermediate",
-      time: "20 min",
-      rating: 4.8,
-      users: 650,
-      isNew: true
+      rating: 4.6,
+      users: 2987
     },
     {
       id: "parent-communication",
       title: "Parent Communication Hub",
-      description: "Streamline parent-teacher interactions",
-      icon: "💬",
-      difficulty: "Beginner",
-      time: "5 min", 
-      rating: 4.6,
-      users: 820
+      description: "Keep parents informed with automated updates",
+      icon: "📞",
+      rating: 4.5,
+      users: 4123
     }
   ]
 };

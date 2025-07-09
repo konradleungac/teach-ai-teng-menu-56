@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import QuickStats from "@/components/dashboard/QuickStats";
 import WorkflowSection from "@/components/dashboard/WorkflowSection";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 import TeachingAssistantBot from "@/components/TeachingAssistantBot";
+import Sidebar from "@/components/dashboard/Sidebar";
 import { workflows } from "@/data/workflows";
 
 interface UserPreferences {
@@ -58,65 +60,72 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-warm">
-      <DashboardHeader 
-        userName={preferences.name}
-        onCommunityClick={handleCommunityClick}
-        onToolSelect={handleToolSelect}
-      />
+    <div className="min-h-screen bg-gradient-warm flex">
+      <Sidebar onToolSelect={handleToolSelect} />
+      
+      <div className="flex-1">
+        <DashboardHeader 
+          userName={preferences.name}
+          onCommunityClick={handleCommunityClick}
+          onToolSelect={handleToolSelect}
+        />
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <div className="mb-12">
-          <HeroSection />
-          <QuickStats />
-        </div>
+        <div className="container mx-auto px-4 py-8">
+          {/* Hero Section */}
+          <div className="mb-12">
+            <HeroSection />
+            <QuickStats />
+          </div>
 
-        {/* Main Toolkit Sections */}
-        <div className="space-y-12">
-          <WorkflowSection
-            title="🥢 For Beginners"
-            description="Simple, low-tech workflows to get you started"
-            workflows={workflows.beginner}
-            badgeText="Perfect for first-timers"
-            badgeVariant="outline"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="3"
-          />
+          {/* Recent Activity - moved up */}
+          <div className="mb-12">
+            <RecentActivity activities={recentActivity} />
+          </div>
 
-          <WorkflowSection
-            title="⭐ AI Recommendations"
-            description="AI-optimized workflows based on your preferences"
-            workflows={workflows.topPicks}
-            badgeText="Personalized for you"
-            badgeVariant="default"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="2"
-            isLarge={true}
-          />
+          {/* Main Toolkit Sections */}
+          <div className="space-y-12">
+            <WorkflowSection
+              title="🥢 For Beginners"
+              description="Simple, low-tech workflows to get you started"
+              workflows={workflows.beginner}
+              badgeText="Perfect for first-timers"
+              badgeVariant="outline"
+              onWorkflowClick={handleWorkflowClick}
+              gridCols="3"
+            />
 
-          <WorkflowSection
-            title="📚 Subject Toolkits"
-            description="Complete tool collections for specific subjects"
-            workflows={workflows.subjectPacks}
-            badgeText="All-in-one solutions"
-            badgeVariant="outline"
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="3"
-          />
+            <WorkflowSection
+              title="⭐ AI Recommendations"
+              description="AI-optimized workflows based on your preferences"
+              workflows={workflows.topPicks}
+              badgeText="Personalized for you"
+              badgeVariant="default"
+              onWorkflowClick={handleWorkflowClick}
+              gridCols="2"
+              isLarge={true}
+            />
 
-          <WorkflowSection
-            title="👥 Community Favorites"
-            description="Popular workflows shared by fellow teachers"
-            workflows={workflows.community}
-            badgeText="View All"
-            showViewAll={true}
-            onViewAllClick={handleCommunityClick}
-            onWorkflowClick={handleWorkflowClick}
-            gridCols="2"
-          />
+            <WorkflowSection
+              title="📚 Subject Toolkits"
+              description="Complete tool collections for specific subjects"
+              workflows={workflows.subjectPacks}
+              badgeText="All-in-one solutions"
+              badgeVariant="outline"
+              onWorkflowClick={handleWorkflowClick}
+              gridCols="3"
+            />
 
-          <RecentActivity activities={recentActivity} />
+            <WorkflowSection
+              title="👥 Community Favorites"
+              description="Popular workflows shared by fellow teachers"
+              workflows={workflows.community}
+              badgeText="View All"
+              showViewAll={true}
+              onViewAllClick={handleCommunityClick}
+              onWorkflowClick={handleWorkflowClick}
+              gridCols="2"
+            />
+          </div>
         </div>
       </div>
 
