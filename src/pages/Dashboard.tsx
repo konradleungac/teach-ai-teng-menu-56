@@ -18,6 +18,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import aiToolsMenu from "@/assets/ai-tools-menu.jpg";
+import TeachingAssistantBot from "@/components/TeachingAssistantBot";
 
 interface UserPreferences {
   name: string;
@@ -429,6 +430,9 @@ const Dashboard = () => {
           </section>
         </div>
       </div>
+
+      {/* Teaching Assistant Chatbot */}
+      <TeachingAssistantBot />
     </div>
   );
 };
