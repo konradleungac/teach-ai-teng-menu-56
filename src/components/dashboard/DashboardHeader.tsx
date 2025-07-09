@@ -2,13 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ToolSearch from "./ToolSearch";
 
 interface DashboardHeaderProps {
   userName: string;
   onCommunityClick: () => void;
+  onToolSelect: (toolId: string) => void;
 }
 
-const DashboardHeader = ({ userName, onCommunityClick }: DashboardHeaderProps) => {
+const DashboardHeader = ({ userName, onCommunityClick, onToolSelect }: DashboardHeaderProps) => {
   const navigate = useNavigate();
 
   return (
@@ -22,6 +24,7 @@ const DashboardHeader = ({ userName, onCommunityClick }: DashboardHeaderProps) =
             <p className="text-muted-foreground">Ready to make teaching easier today?</p>
           </div>
           <div className="flex items-center gap-4">
+            <ToolSearch onToolSelect={onToolSelect} />
             <Button variant="outline" onClick={onCommunityClick}>
               <MessageCircle className="w-4 h-4 mr-2" />
               Community

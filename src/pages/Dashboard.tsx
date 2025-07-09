@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -41,6 +40,10 @@ const Dashboard = () => {
     navigate('/community');
   };
 
+  const handleToolSelect = (toolId: string) => {
+    navigate(`/workflow/${toolId}`);
+  };
+
   if (!preferences) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -59,6 +62,7 @@ const Dashboard = () => {
       <DashboardHeader 
         userName={preferences.name}
         onCommunityClick={handleCommunityClick}
+        onToolSelect={handleToolSelect}
       />
 
       <div className="container mx-auto px-4 py-8">
