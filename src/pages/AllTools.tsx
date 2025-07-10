@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import favicon from "@/assets/favicon.png";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
+import TeachingAssistantBot from "@/components/TeachingAssistantBot";
 
 // Flatten all workflows into a single array
 const allWorkflows = [
@@ -143,6 +144,7 @@ const AllTools = () => {
           </div>
         )}
       </div>
+      <TeachingAssistantBot />
     </div>
   );
 };

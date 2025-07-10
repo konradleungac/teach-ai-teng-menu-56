@@ -1,18 +1,25 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ArrowRight, Heart, BookOpen, Users, Target } from "lucide-react";
+import TeachingAssistantBot from "@/components/TeachingAssistantBot";
 
 const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user has completed onboarding
-    const preferences = localStorage.getItem('userPreferences');
+    const preferences = localStorage.getItem("userPreferences");
     if (preferences) {
       // Redirect to dashboard if already onboarded
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   }, [navigate]);
 
@@ -23,13 +30,17 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
             <h1 className="text-5xl font-bold text-foreground mb-6">
-              Welcome to <span className="bg-gradient-primary bg-clip-text text-transparent">GoodClass.ai</span>
+              Welcome to{" "}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                GoodClass.ai
+              </span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Your personalized AI teaching assistant, designed specifically for middle school educators. 
-              Experience the power of AI through our intuitive, organized interface.
+              Your personalized AI teaching assistant, designed specifically for
+              middle school educators. Experience the power of AI through our
+              intuitive, organized interface.
             </p>
-            
+
             <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mb-12">
               <div className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-primary" />
@@ -49,9 +60,9 @@ const Index = () => {
               </div>
             </div>
 
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/onboarding')}
+            <Button
+              size="lg"
+              onClick={() => navigate("/onboarding")}
               variant="glow"
               className="text-lg px-8 py-6"
             >
@@ -66,7 +77,8 @@ const Index = () => {
                 <div className="text-3xl mb-2">🥢</div>
                 <CardTitle>Organized Experience</CardTitle>
                 <CardDescription>
-                  Browse organized tool categories designed for easy discovery and seamless workflow
+                  Browse organized tool categories designed for easy discovery
+                  and seamless workflow
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -76,7 +88,8 @@ const Index = () => {
                 <div className="text-3xl mb-2">🎯</div>
                 <CardTitle>Personalized Recommendations</CardTitle>
                 <CardDescription>
-                  Get AI-powered suggestions based on your subject, teaching style, and experience level
+                  Get AI-powered suggestions based on your subject, teaching
+                  style, and experience level
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -86,7 +99,8 @@ const Index = () => {
                 <div className="text-3xl mb-2">👥</div>
                 <CardTitle>Community-Driven</CardTitle>
                 <CardDescription>
-                  Learn from fellow teachers' success stories and share your own experiences
+                  Learn from fellow teachers' success stories and share your own
+                  experiences
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -98,17 +112,16 @@ const Index = () => {
               Ready to transform your teaching experience?
             </h2>
             <p className="text-muted-foreground mb-6">
-              Join thousands of middle school teachers who have already discovered the power of personalized AI assistance.
+              Join thousands of middle school teachers who have already
+              discovered the power of personalized AI assistance.
             </p>
-            <Button 
-              onClick={() => navigate('/onboarding')}
-              variant="gradient"
-            >
+            <Button onClick={() => navigate("/onboarding")} variant="gradient">
               Start Your Journey <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
           </div>
         </div>
       </div>
+      <TeachingAssistantBot />
     </div>
   );
 };
