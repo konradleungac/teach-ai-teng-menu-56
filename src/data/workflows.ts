@@ -42,8 +42,7 @@ export const workflows = {
       difficulty: "Intermediate",
       time: "10 min",
       rating: 4.9,
-      users: 2100,
-      isRecommended: true
+      users: 2100
     },
     {
       id: "engagement-tracker",
@@ -68,6 +67,53 @@ export const workflows = {
   ],
   subjectPacks: [
     {
+      id: "math-pack",
+      title: "Interactive Math Workbench", 
+      description: "Problem solving and assessment tools",
+      subjects: ["Math"],
+      icon: "🔢",
+      tools: 3,
+      toolList: [
+        {
+          id: "math-quiz-generator",
+          title: "Math Quiz Generator",
+          description: "Create custom quizzes for middle school math topics.",
+          icon: "🧮",
+          steps: [
+            { title: "Select Topic", description: "Choose a math topic (e.g., fractions, algebra)", input: "topic" },
+            { title: "Set Difficulty", description: "Pick the difficulty level (easy, medium, hard)", input: "difficulty" },
+            { title: "Generate Quiz", description: "AI generates a quiz with answer key", automated: true },
+            { title: "Review & Export", description: "Review and download the quiz for your class", automated: true }
+          ]
+        },
+        {
+          id: "math-problem-solver",
+          title: "Step-by-Step Problem Solver",
+          description: "Get detailed solutions for math problems.",
+          icon: "📐",
+          steps: [
+            { title: "Enter Problem", description: "Type or paste a math problem", input: "problem" },
+            { title: "AI Analysis", description: "AI breaks down the solution step by step", automated: true },
+            { title: "Review Solution", description: "See the full solution and explanation", automated: true }
+          ]
+        },
+        {
+          id: "math-homework-checker",
+          title: "Homework Checker",
+          description: "Quickly check and grade student homework.",
+          icon: "📊",
+          steps: [
+            { title: "Upload Homework", description: "Upload student homework files", input: "files" },
+            { title: "Set Grading Criteria", description: "Define what to check for (accuracy, steps, etc.)", input: "criteria" },
+            { title: "AI Grading", description: "AI reviews and grades submissions", automated: true },
+            { title: "Export Results", description: "Download grades and feedback for students", automated: true }
+          ]
+        }
+      ],
+      rating: 4.7,
+      users: 1050
+    },
+    {
       id: "science-pack",
       title: "Middle School Science RAG Pack",
       description: "Complete science teaching workflows",
@@ -86,16 +132,6 @@ export const workflows = {
       tools: 12,
       rating: 4.8,
       users: 1200
-    },
-    {
-      id: "math-pack",
-      title: "Interactive Math Workbench", 
-      description: "Problem solving and assessment tools",
-      subjects: ["Math"],
-      icon: "🔢",
-      tools: 10,
-      rating: 4.7,
-      users: 1050
     }
   ],
   community: [
@@ -107,8 +143,7 @@ export const workflows = {
       difficulty: "Intermediate",
       time: "20 min",
       rating: 4.8,
-      users: 650,
-      isNew: true
+      users: 650
     },
     {
       id: "parent-communication",

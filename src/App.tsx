@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import WorkflowDetail from "./pages/WorkflowDetail";
 import Community from "./pages/Community";
 import NotFound from "./pages/NotFound";
+import AllTools from "./pages/AllTools";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/workflow/:id" element={<WorkflowDetail />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/all-tools" element={<AllTools />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

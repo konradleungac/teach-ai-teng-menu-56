@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -29,6 +28,8 @@ interface WorkflowSectionProps {
   onWorkflowClick: (workflowId: string) => void;
   gridCols?: "2" | "3";
   isLarge?: boolean;
+  favorites?: string[];
+  toggleFavorite?: (workflowId: string) => void;
 }
 
 const WorkflowSection = ({
@@ -41,11 +42,14 @@ const WorkflowSection = ({
   onViewAllClick,
   onWorkflowClick,
   gridCols = "3",
-  isLarge = false
+  isLarge = false,
+  favorites = [],
+  toggleFavorite,
 }: WorkflowSectionProps) => {
-  const gridClasses = gridCols === "2" 
-    ? "grid grid-cols-1 md:grid-cols-2 gap-6"
-    : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+  const gridClasses =
+    gridCols === "2"
+      ? "grid grid-cols-1 md:grid-cols-2 gap-6"
+      : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
 
   return (
     <section>
@@ -59,21 +63,27 @@ const WorkflowSection = ({
             View All <ChevronRight className="w-4 h-4 ml-1" />
           </Button>
         ) : (
-          <Badge 
+          <Badge
             variant={badgeVariant}
-            className={badgeVariant === "default" ? "bg-gradient-primary text-sm" : "text-sm"}
+            className={
+              badgeVariant === "default"
+                ? "bg-gradient-primary text-sm"
+                : "text-sm"
+            }
           >
             {badgeText}
           </Badge>
         )}
       </div>
       <div className={gridClasses}>
-        {workflows.map(workflow => (
-          <WorkflowCard 
+        {workflows.map((workflow) => (
+          <WorkflowCard
             key={workflow.id}
-            workflow={workflow} 
+            workflow={workflow}
             isLarge={isLarge}
             onClick={onWorkflowClick}
+            isFavorite={favorites.includes(workflow.id)}
+            onToggleFavorite={toggleFavorite}
           />
         ))}
       </div>

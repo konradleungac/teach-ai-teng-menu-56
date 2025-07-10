@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,15 +21,78 @@ interface ToolSuggestion {
   relevanceScore: number;
 }
 
-const TeachingAssistantBot = () => {
+interface TeachingAssistantBotProps {
+  demoMode?: boolean;
+}
+
+const DEMO_CONVERSATION: Message[] = [
+  {
+    id: "welcome",
+    text: "Hi! I'm your teaching assistant. What are you working on today? I can help you find the perfect tools for your tasks!\n\nWhat can this chatbot do? Ask me about lesson planning, grading, student engagement, or finding the right tools for your teaching tasks. I can recommend features, guide you to workflows, and help you get the most out of this platform!",
+    isUser: false,
+  },
+  {
+    id: "user1",
+    text: "I want to grade homework assignments efficiently.",
+    isUser: true,
+  },
+  {
+    id: "bot1",
+    text: "Great! I found some tools that might be perfect for what you're working on:",
+    isUser: false,
+    suggestions: [
+      {
+        id: "homework-helper",
+        title: "Homework Assistant",
+        description: "Create and grade homework assignments",
+        icon: "📝",
+        relevanceScore: 30,
+      },
+      {
+        id: "smart-grading",
+        title: "AI-Powered Grading Suite",
+        description: "Comprehensive grading with detailed feedback",
+        icon: "🎯",
+        relevanceScore: 25,
+      },
+    ],
+  },
+  {
+    id: "user2",
+    text: "Can you help me track student engagement too?",
+    isUser: true,
+  },
+  {
+    id: "bot2",
+    text: "Excellent! I have some suggestions that should make your work easier:",
+    isUser: false,
+    suggestions: [
+      {
+        id: "engagement-tracker",
+        title: "Student Engagement Analytics",
+        description: "Track and improve student participation",
+        icon: "📊",
+        relevanceScore: 30,
+      },
+    ],
+  },
+];
+
+const TeachingAssistantBot = ({
+  demoMode = false,
+}: TeachingAssistantBotProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      text: "Hi! I'm your teaching assistant. What are you working on today? I can help you find the perfect tools for your tasks!",
-      isUser: false,
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>(
+    demoMode
+      ? DEMO_CONVERSATION
+      : [
+          {
+            id: "welcome",
+            text: "Hi! I'm your teaching assistant. What are you working on today? I can help you find the perfect tools for your tasks!\n\nWhat can this chatbot do? Ask me about lesson planning, grading, student engagement, or finding the right tools for your teaching tasks. I can recommend features, guide you to workflows, and help you get the most out of this platform!",
+            isUser: false,
+          },
+        ]
+  );
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -43,49 +105,95 @@ const TeachingAssistantBot = () => {
       title: "Simple Quiz Maker",
       description: "Generate quick assessments from your content",
       icon: "✅",
-      keywords: ["quiz", "test", "assessment", "questions", "exam", "evaluate", "check understanding"],
-      category: "assessment"
+      keywords: [
+        "quiz",
+        "test",
+        "assessment",
+        "questions",
+        "exam",
+        "evaluate",
+        "check understanding",
+      ],
+      category: "assessment",
     },
     {
       id: "lesson-plan-basic",
       title: "Quick Lesson Planner",
       description: "Create structured lesson plans in minutes",
       icon: "📋",
-      keywords: ["lesson", "plan", "teaching", "curriculum", "structure", "objectives", "activities"],
-      category: "planning"
+      keywords: [
+        "lesson",
+        "plan",
+        "teaching",
+        "curriculum",
+        "structure",
+        "objectives",
+        "activities",
+      ],
+      category: "planning",
     },
     {
       id: "homework-helper",
       title: "Homework Assistant",
       description: "Create and grade homework assignments",
       icon: "📝",
-      keywords: ["homework", "assignment", "practice", "exercises", "tasks", "grade", "feedback"],
-      category: "assignment"
+      keywords: [
+        "homework",
+        "assignment",
+        "practice",
+        "exercises",
+        "tasks",
+        "grade",
+        "feedback",
+      ],
+      category: "assignment",
     },
     {
       id: "smart-grading",
       title: "AI-Powered Grading Suite",
       description: "Comprehensive grading with detailed feedback",
       icon: "🎯",
-      keywords: ["grading", "feedback", "rubric", "assessment", "evaluate", "score", "mark"],
-      category: "grading"
+      keywords: [
+        "grading",
+        "feedback",
+        "rubric",
+        "assessment",
+        "evaluate",
+        "score",
+        "mark",
+      ],
+      category: "grading",
     },
     {
       id: "engagement-tracker",
       title: "Student Engagement Analytics",
       description: "Track and improve student participation",
       icon: "📊",
-      keywords: ["engagement", "participation", "analytics", "tracking", "behavior", "attention"],
-      category: "analytics"
+      keywords: [
+        "engagement",
+        "participation",
+        "analytics",
+        "tracking",
+        "behavior",
+        "attention",
+      ],
+      category: "analytics",
     },
     {
-      id: "differentiation-pack", 
+      id: "differentiation-pack",
       title: "Differentiation Toolkit",
       description: "Adapt content for all learning styles",
       icon: "🔄",
-      keywords: ["differentiation", "adaptation", "learning styles", "special needs", "accommodate", "modify"],
-      category: "adaptation"
-    }
+      keywords: [
+        "differentiation",
+        "adaptation",
+        "learning styles",
+        "special needs",
+        "accommodate",
+        "modify",
+      ],
+      category: "adaptation",
+    },
   ];
 
   const scrollToBottom = () => {
@@ -100,20 +208,20 @@ const TeachingAssistantBot = () => {
     const message = userMessage.toLowerCase();
     const suggestions: ToolSuggestion[] = [];
 
-    toolDatabase.forEach(tool => {
+    toolDatabase.forEach((tool) => {
       let relevanceScore = 0;
-      
+
       // Check for keyword matches
-      tool.keywords.forEach(keyword => {
+      tool.keywords.forEach((keyword) => {
         if (message.includes(keyword.toLowerCase())) {
           relevanceScore += 10;
         }
       });
 
       // Check for partial matches
-      tool.keywords.forEach(keyword => {
-        const words = message.split(' ');
-        words.forEach(word => {
+      tool.keywords.forEach((keyword) => {
+        const words = message.split(" ");
+        words.forEach((word) => {
           if (word.length > 3 && keyword.toLowerCase().includes(word)) {
             relevanceScore += 5;
           }
@@ -131,7 +239,7 @@ const TeachingAssistantBot = () => {
           title: tool.title,
           description: tool.description,
           icon: tool.icon,
-          relevanceScore
+          relevanceScore,
         });
       }
     });
@@ -142,7 +250,10 @@ const TeachingAssistantBot = () => {
       .slice(0, 3);
   };
 
-  const generateResponse = (userMessage: string, suggestions: ToolSuggestion[]): string => {
+  const generateResponse = (
+    userMessage: string,
+    suggestions: ToolSuggestion[]
+  ): string => {
     if (suggestions.length === 0) {
       return "I understand you're working on something interesting! While I couldn't find specific tools for that exact task, you might want to check out our dashboard for all available tools. Is there anything else I can help you find?";
     }
@@ -166,7 +277,7 @@ const TeachingAssistantBot = () => {
       isUser: true,
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
 
@@ -182,7 +293,7 @@ const TeachingAssistantBot = () => {
         suggestions: suggestions.length > 0 ? suggestions : undefined,
       };
 
-      setMessages(prev => [...prev, botMessage]);
+      setMessages((prev) => [...prev, botMessage]);
       setIsTyping(false);
     }, 1000);
   };
@@ -193,7 +304,7 @@ const TeachingAssistantBot = () => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
@@ -230,61 +341,88 @@ const TeachingAssistantBot = () => {
             </Button>
           </CardHeader>
 
+          {/* Introductory message for teachers */}
+
           <CardContent className="flex-1 flex flex-col p-0">
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[340px] min-h-[100px] scrollbar-thin scrollbar-thumb-muted-foreground/40 scrollbar-track-muted/10">
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${
+                    message.isUser ? "justify-end" : "justify-start"
+                  }`}
                 >
-                  <div className={`flex items-start gap-2 max-w-[80%] ${
-                    message.isUser ? 'flex-row-reverse' : 'flex-row'
-                  }`}>
-                    <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                      message.isUser 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-muted text-muted-foreground'
-                    }`}>
-                      {message.isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <div className={`rounded-lg px-3 py-2 text-sm ${
+                  <div
+                    className={`flex items-start gap-2 max-w-[80%] ${
+                      message.isUser ? "flex-row-reverse" : "flex-row"
+                    }`}
+                  >
+                    <div
+                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                         message.isUser
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted text-foreground'
-                      }`}>
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {message.isUser ? (
+                        <User className="h-4 w-4" />
+                      ) : (
+                        <Bot className="h-4 w-4" />
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <div
+                        className={`rounded-lg px-3 py-2 text-sm break-words whitespace-pre-line overflow-x-auto max-w-full`}
+                        style={{
+                          wordBreak: "break-word",
+                          backgroundColor: message.isUser
+                            ? "#f5f5f5"
+                            : "#C89978",
+                          color: message.isUser ? "#222" : "#fff",
+                        }}
+                      >
                         {message.text}
                       </div>
 
                       {/* Tool Suggestions */}
-                      {message.suggestions && message.suggestions.length > 0 && (
-                        <div className="space-y-2">
-                          {message.suggestions.map((suggestion) => (
-                            <div
-                              key={suggestion.id}
-                              className="border rounded-lg p-3 bg-card cursor-pointer hover:bg-muted/50 transition-colors"
-                              onClick={() => handleToolClick(suggestion.id)}
-                            >
-                              <div className="flex items-start gap-2">
-                                <span className="text-lg">{suggestion.icon}</span>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center gap-2">
-                                    <h4 className="font-medium text-sm text-foreground">
-                                      {suggestion.title}
-                                    </h4>
-                                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                      {message.suggestions &&
+                        message.suggestions.length > 0 && (
+                          <div className="space-y-2">
+                            {message.suggestions.map((suggestion) => (
+                              <div
+                                key={suggestion.id}
+                                className="border rounded-lg p-3 bg-card cursor-pointer hover:bg-muted/50 transition-colors overflow-x-auto max-w-full"
+                                style={{ wordBreak: "break-word" }}
+                                onClick={() => handleToolClick(suggestion.id)}
+                              >
+                                <div className="flex items-start gap-2">
+                                  <span className="text-lg">
+                                    {suggestion.icon}
+                                  </span>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2">
+                                      <h4
+                                        className="font-medium text-sm text-foreground break-words"
+                                        style={{ wordBreak: "break-word" }}
+                                      >
+                                        {suggestion.title}
+                                      </h4>
+                                      <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                                    </div>
+                                    <p
+                                      className="text-xs text-muted-foreground mt-1 break-words"
+                                      style={{ wordBreak: "break-word" }}
+                                    >
+                                      {suggestion.description}
+                                    </p>
                                   </div>
-                                  <p className="text-xs text-muted-foreground mt-1">
-                                    {suggestion.description}
-                                  </p>
                                 </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                            ))}
+                          </div>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -300,14 +438,20 @@ const TeachingAssistantBot = () => {
                     <div className="bg-muted rounded-lg px-3 py-2">
                       <div className="flex space-x-1">
                         <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        <div
+                          className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                          style={{ animationDelay: "0.1s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 
@@ -322,7 +466,7 @@ const TeachingAssistantBot = () => {
                   className="flex-1"
                   disabled={isTyping}
                 />
-                <Button 
+                <Button
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
                   size="icon"

@@ -1,7 +1,12 @@
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Star, Target, Clock, Lightbulb } from "lucide-react";
+import { Star, Target, Clock, Lightbulb, Heart } from "lucide-react";
 
 interface Workflow {
   id: string;
@@ -21,14 +26,22 @@ interface WorkflowCardProps {
   workflow: Workflow;
   isLarge?: boolean;
   onClick: (workflowId: string) => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: (workflowId: string) => void;
 }
 
-const WorkflowCard = ({ workflow, isLarge = false, onClick }: WorkflowCardProps) => {
+const WorkflowCard = ({
+  workflow,
+  isLarge = false,
+  onClick,
+  isFavorite,
+  onToggleFavorite,
+}: WorkflowCardProps) => {
   return (
-    <Card 
+    <Card
       className={`cursor-pointer transition-all duration-200 hover:shadow-elegant hover:-translate-y-1 ${
-        isLarge ? 'md:col-span-2' : ''
-      } ${workflow.isRecommended ? 'ring-2 ring-primary animate-glow-pulse' : ''}`}
+        isLarge ? "md:col-span-2" : ""
+      } ${workflow.isRecommended ? "" : ""}`}
       onClick={() => onClick(workflow.id)}
     >
       <CardHeader className="pb-3">
@@ -37,15 +50,35 @@ const WorkflowCard = ({ workflow, isLarge = false, onClick }: WorkflowCardProps)
             <div className="text-2xl">{workflow.icon}</div>
             <div>
               <CardTitle className="text-lg">{workflow.title}</CardTitle>
-              <CardDescription className="text-sm">{workflow.description}</CardDescription>
+              <CardDescription className="text-sm">
+                {workflow.description}
+              </CardDescription>
             </div>
           </div>
+          {onToggleFavorite && (
+            <button
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleFavorite(workflow.id);
+              }}
+              className="ml-2 bg-white/80 rounded-full p-1 shadow hover:scale-110 transition-transform"
+            >
+              <Heart
+                className={`w-5 h-5 ${
+                  isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"
+                }`}
+                strokeWidth={2}
+                fill={isFavorite ? "#ef4444" : "none"}
+              />
+            </button>
+          )}
           {workflow.isRecommended && (
             <Badge className="bg-gradient-primary">Recommended</Badge>
           )}
-          {workflow.isNew && (
-            <Badge variant="secondary">New</Badge>
-          )}
+          {workflow.isNew && <Badge variant="secondary">New</Badge>}
         </div>
       </CardHeader>
       <CardContent className="pt-0">
